@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetroInstance {
     companion object {
-        private const val BaseURL = "https://my-json-server.typicode.com//"
+        private const val BaseURL = "https://my-json-server.typicode.com/"
 
         fun getRetroInstance(): Retrofit {
 
