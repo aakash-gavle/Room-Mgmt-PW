@@ -10,7 +10,7 @@ data class Facilities(
 
 data class Facility(
     @SerializedName("facility_id")
-    val facilityId: String?,
+    val facilityId: String,
     val name: String,
     val options: ArrayList<Option>
 )

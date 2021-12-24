@@ -19,6 +19,7 @@ import com.example.roommgmtpw.viewmodel.MainActivityViewModel
 class FacilitiesFragment : Fragment() {
 
     private lateinit var recyclerAdapter : RecyclerViewAdapter
+  //  private lateinit var exclusionRecyclerAdapter : ExclusionAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,15 +33,21 @@ class FacilitiesFragment : Fragment() {
     }
 
     private fun initViewModel(view: View) {
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+       recyclerView.layoutManager = LinearLayoutManager(activity)
 
         val decoration  = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)
         recyclerView.addItemDecoration(decoration)
 
-        recyclerAdapter = RecyclerViewAdapter()
-        recyclerView.adapter = recyclerAdapter
+       recyclerAdapter = RecyclerViewAdapter()
+       recyclerView.adapter = recyclerAdapter
 
+   /*     val exclusionRecyclerView = view.findViewById<RecyclerView>(R.id.exclusionRecyclerView)
+        exclusionRecyclerView.layoutManager = LinearLayoutManager(activity)
+       exclusionRecyclerAdapter = ExclusionAdapter()
+       exclusionRecyclerView.adapter = exclusionRecyclerAdapter
+        exclusionRecyclerView.addItemDecoration(decoration)*/
 
     }
 
@@ -49,6 +56,7 @@ class FacilitiesFragment : Fragment() {
         viewModel.getRecyclerListObserver().observe(viewLifecycleOwner, Observer<Facilities> {
             if(it != null) {
                 recyclerAdapter.setData(it.facilities)
+              //  exclusionRecyclerAdapter.setExclusionData(it.exclusion)
             } else {
                 Toast.makeText(activity, "Error in getting data", Toast.LENGTH_SHORT).show()
             }

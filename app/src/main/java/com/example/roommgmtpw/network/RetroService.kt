@@ -7,4 +7,5 @@ interface RetroService {
 
     @GET("ricky1550/pariksha/db")
     suspend fun getFacilities(): Facilities
+
 }

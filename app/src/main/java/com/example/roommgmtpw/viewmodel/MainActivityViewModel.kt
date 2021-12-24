@@ -3,10 +3,7 @@ package com.example.roommgmtpw.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.roommgmtpw.model.Exclusion
 import com.example.roommgmtpw.model.Facilities
-import com.example.roommgmtpw.model.Facility
-import com.example.roommgmtpw.model.Option
 import com.example.roommgmtpw.network.RetroInstance
 import com.example.roommgmtpw.network.RetroService
 import kotlinx.coroutines.Dispatchers
@@ -26,5 +23,6 @@ class MainActivityViewModel :ViewModel() {
             val response  = retroInstance.getFacilities()
             recyclerListLiveData.postValue(response)
         }
+
     }
 }

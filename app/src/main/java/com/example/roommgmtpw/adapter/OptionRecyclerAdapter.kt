@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roommgmtpw.R
 import com.example.roommgmtpw.model.Option
@@ -16,22 +15,38 @@ class OptionRecyclerAdapter(optionData: List<Option>):
 
     private var options: List<Option> = ArrayList()
 
+    var selected =-1
+    var lastSelectedItem=-1
+
    init {
        this.options=optionData
    }
     var onItemClick: ((String) -> Unit)? = null
+
 
    inner class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val icon =view.findViewById<TextView>(R.id.icon)
         val optionName=view.findViewById<TextView>(R.id.optionName)
        val relLayout=view.findViewById<RelativeLayout>(R.id.relLayout)
 
+       fun defaultBg(){
+           relLayout.setBackgroundColor(Color.parseColor("#e6bbad"));
+       }
+       fun selectedBg(){
+           relLayout.setBackgroundColor(Color.parseColor("#da869c"));
+       }
        init {
+
            view.setOnClickListener{
                onItemClick?.invoke(options[adapterPosition].name)
-               Toast.makeText(view.context,"Item Selected",Toast.LENGTH_SHORT).show()
-               relLayout.setBackgroundColor(Color.parseColor("#dac486"));
-
+               selected=adapterPosition
+               if(lastSelectedItem==-1){
+                   lastSelectedItem=selected
+           }else {
+               notifyItemChanged(lastSelectedItem)
+               lastSelectedItem=selected
+            }
+               notifyItemChanged(selected)
            }
        }
 
@@ -52,6 +67,10 @@ class OptionRecyclerAdapter(optionData: List<Option>):
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        if(position == selected)
+            holder.selectedBg()
+        else
+            holder.defaultBg()
         holder.bindOption(options[position])
     }
 }
